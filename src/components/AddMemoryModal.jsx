@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   X,
   Upload,
@@ -53,6 +53,42 @@ export default function AddMemoryModal({ isOpen, onClose, onMemoryAdded, themeCo
   const [croppedData, setCroppedData] = useState(null); // { blob, dataUrl }
 
   const fileInputRef = useRef(null);
+
+  // Reset all modal fields so no previous info/photo lingers
+  const resetForm = useCallback(() => {
+    setActiveTab('upload');
+    setSelectedFile(null);
+    setPreviewUrl('');
+    setImageUrl('');
+    setDate(new Date().toISOString().split('T')[0]);
+    setTitle('');
+    setDescription('');
+    setAuthor('');
+    setSelectedFrame('polaroid');
+    setSelectedMood('🥰 Romantis');
+    setStickers(['🌸', '✨']);
+    setIsSubmitting(false);
+    setErrorMsg('');
+    setIsCroppingOpen(true);
+    setAspectRatio('4:3');
+    setCroppedData(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }, []);
+
+  // Reset all fields whenever the modal is opened
+  useEffect(() => {
+    if (isOpen) {
+      resetForm();
+    }
+  }, [isOpen, resetForm]);
+
+  const handleClose = () => {
+    playPopSound();
+    resetForm();
+    onClose();
+  };
 
   if (!isOpen) return null;
 
@@ -171,6 +207,7 @@ export default function AddMemoryModal({ isOpen, onClose, onMemoryAdded, themeCo
       });
 
       playSparkleSound();
+      resetForm();
       onMemoryAdded(result.data);
       onClose();
     } catch (err) {
@@ -233,10 +270,7 @@ export default function AddMemoryModal({ isOpen, onClose, onMemoryAdded, themeCo
           </div>
 
           <button
-            onClick={() => {
-              playPopSound();
-              onClose();
-            }}
+            onClick={handleClose}
             className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
               isDark
                 ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700'
@@ -714,10 +748,7 @@ export default function AddMemoryModal({ isOpen, onClose, onMemoryAdded, themeCo
           >
             <button
               type="button"
-              onClick={() => {
-                playPopSound();
-                onClose();
-              }}
+              onClick={handleClose}
               disabled={isSubmitting}
               className={`px-5 py-2.5 rounded-full border font-cute text-sm font-bold transition-colors ${
                 isDark
