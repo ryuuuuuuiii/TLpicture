@@ -13,15 +13,21 @@ const PORT = process.env.PORT || 5000;
 
 // Directories
 const DATA_DIR = path.join(__dirname, 'data');
-const UPLOADS_DIR = path.join(__dirname, 'uploads');
+const UPLOADS_DIR = process.env.VERCEL ? path.join('/tmp', 'uploads') : path.join(__dirname, 'uploads');
 const DB_FILE = path.join(DATA_DIR, 'memories.json');
+const TMP_DB_FILE = path.join('/tmp', 'memories.json');
 
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-}
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (e) {}
+
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+} catch (e) {}
 
 // Multer Storage for Uploads
 const storage = multer.diskStorage({
@@ -53,7 +59,10 @@ app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
 // Serve Uploads
-app.use('/uploads', express.static(UPLOADS_DIR));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+if (process.env.VERCEL) {
+  app.use('/uploads', express.static(UPLOADS_DIR));
+}
 
 // Initial cute sample data
 const sampleMemories = [
@@ -113,17 +122,21 @@ const sampleMemories = [
 
 // Helper to read database
 function getMemories() {
-  if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(DB_FILE, JSON.stringify(sampleMemories, null, 2), 'utf-8');
-    return sampleMemories;
+  if (process.env.VERCEL && fs.existsSync(TMP_DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(TMP_DB_FILE, 'utf-8');
+      return JSON.parse(raw);
+    } catch (e) {}
   }
-  try {
-    const raw = fs.readFileSync(DB_FILE, 'utf-8');
-    return JSON.parse(raw);
-  } catch (err) {
-    console.error('Error reading DB:', err);
-    return sampleMemories;
+  if (fs.existsSync(DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(DB_FILE, 'utf-8');
+      return JSON.parse(raw);
+    } catch (err) {
+      console.error('Error reading DB:', err);
+    }
   }
+  return sampleMemories;
 }
 
 // Helper to save database
@@ -131,7 +144,13 @@ function saveMemories(memories) {
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(memories, null, 2), 'utf-8');
   } catch (err) {
-    console.error('Error writing DB:', err);
+    if (process.env.VERCEL) {
+      try {
+        fs.writeFileSync(TMP_DB_FILE, JSON.stringify(memories, null, 2), 'utf-8');
+      } catch (e) {}
+    } else {
+      console.error('Error writing DB:', err);
+    }
   }
 }
 
@@ -317,6 +336,10 @@ if (fs.existsSync(DIST_DIR)) {
   });
 }
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🌸 Sweet Moments Server running on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🌸 Sweet Moments Server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
