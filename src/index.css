@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --font-cute: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-handwriting: 'Caveat', cursive;
+  --font-display: 'Outfit', sans-serif;
+  --font-romantic: 'Sacramento', cursive;
+  
+  --color-pastel-pink: #ffe4e6;
+  --color-pastel-rose: #fecdd3;
+  --color-pastel-peach: #ffedd5;
+  --color-pastel-lavender: #f3e8ff;
+  --color-pastel-mint: #ccfbf1;
+}
+
+body {
+  font-family: var(--font-cute);
+  background-color: #fff9fa;
+  background-image: 
+    radial-gradient(#fecdd3 0.75px, transparent 0.75px),
+    radial-gradient(#ffe4e6 0.75px, #fff9fa 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Custom Cute Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fdf2f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #f472b6;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ec4899;
+}
+
+/* Cute Floating Animations */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(244, 114, 182, 0.65);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: floatGentle 4.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* Washi Tape Accent */
+.washi-tape-pink {
+  background: rgba(251, 207, 232, 0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-left: 2px dashed rgba(244, 114, 182, 0.4);
+  border-right: 2px dashed rgba(244, 114, 182, 0.4);
+}
+
+.washi-tape-peach {
+  background: rgba(254, 215, 170, 0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-left: 2px dashed rgba(251, 146, 60, 0.4);
+  border-right: 2px dashed rgba(251, 146, 60, 0.4);
+}
+
+.washi-tape-lavender {
+  background: rgba(233, 213, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-left: 2px dashed rgba(192, 132, 252, 0.4);
+  border-right: 2px dashed rgba(192, 132, 252, 0.4);
+}
+
+.washi-tape-mint {
+  background: rgba(204, 251, 241, 0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border-left: 2px dashed rgba(45, 212, 191, 0.4);
+  border-right: 2px dashed rgba(45, 212, 191, 0.4);
+}
+
+/* Postage Stamp Border */
+.stamp-border {
+  border: 4px solid #fff;
+  box-shadow: 0 4px 20px rgba(244, 114, 182, 0.15);
+  outline: 6px dashed #f472b6;
+  outline-offset: -3px;
+}
+
+/* Gold Glitter / Fairy Frame */
+.fairy-gold-border {
+  border: 4px solid #fde047;
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 50%, #fef3c7 100%);
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.35), inset 0 0 10px rgba(251, 191, 36, 0.2);
+}
+
+/* Film Strip Accents */
+.film-perforations-top {
+  background-image: radial-gradient(circle, #1e293b 4px, transparent 4.5px);
+  background-size: 16px 16px;
+  background-repeat: repeat-x;
+  background-position: center;
+}

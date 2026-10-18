@@ -1,0 +1,87 @@
+[
+  {
+    "id": "sample-1",
+    "date": "2023-08-14",
+    "title": "Pertama Kali Ketemu di Cafe ☕✨",
+    "description": "Masih inget banget pas kamu nervous numpahin sedikit kopi, terus kita berdua malah ketawa bareng. Momen pertama yang bikin deg-degan tapi manis banget!",
+    "imageUrl": "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=800&q=80",
+    "author": "Kamu & Aku",
+    "frame": "polaroid",
+    "mood": "🥰 Romantis",
+    "stickers": [
+      "🌸",
+      "✨",
+      "☕"
+    ],
+    "likes": 13,
+    "createdAt": "2023-08-14T10:00:00.000Z"
+  },
+  {
+    "id": "sample-2",
+    "date": "2023-11-20",
+    "title": "Piknik Sore di Bawah Pohon Rindang 🧺🍓",
+    "description": "Kita bawa bekal sandwich bikinan sendiri sama stroberi manis. Udaranya adem banget, kita ngobrolin masa depan sampe lupa waktu pas matahari terbenam.",
+    "imageUrl": "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80",
+    "author": "Si Manis",
+    "frame": "floral",
+    "mood": "🌸 Bahagia",
+    "stickers": [
+      "🍓",
+      "🎀",
+      "🧺"
+    ],
+    "likes": 19,
+    "createdAt": "2023-11-20T16:30:00.000Z"
+  },
+  {
+    "id": "sample-3",
+    "date": "2024-02-14",
+    "title": "Bunga Mawar & Senyum Manismu 🌹💐",
+    "description": "Hari kasih sayang bareng kamu. Matamu berbinar-binar pas nerima buket mawar ini. Bener-bener hari terindah yang selalu pengen diulang.",
+    "imageUrl": "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80",
+    "author": "My Love",
+    "frame": "gold",
+    "mood": "✨ Spesial",
+    "stickers": [
+      "🌹",
+      "💖",
+      "👑"
+    ],
+    "likes": 27,
+    "createdAt": "2024-02-14T19:00:00.000Z"
+  },
+  {
+    "id": "sample-4",
+    "date": "2024-07-05",
+    "title": "Sunset Pantai & Pasir Putih 🏖️🌅",
+    "description": "Jalan santai di pinggir pantai sambil denger deburan ombak dan angin sepoi-sepoi. Langitnya warna pink keemasan, persis kaya cerita dongeng!",
+    "imageUrl": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+    "author": "Explorer Kita",
+    "frame": "filmstrip",
+    "mood": "🏖️ Liburan",
+    "stickers": [
+      "🌊",
+      "🌅",
+      "🐚"
+    ],
+    "likes": 21,
+    "createdAt": "2024-07-05T17:45:00.000Z"
+  },
+  {
+    "id": "mem-1792294415486-282",
+    "date": "2026-10-05",
+    "title": "date",
+    "description": "mmmmmmmmmmm",
+    "imageUrl": "/uploads/memory-1792294415452-64288.png",
+    "author": "fesal",
+    "frame": "gold",
+    "mood": "🥰 Romantis",
+    "stickers": [
+      "🌸",
+      "✨",
+      "🎀"
+    ],
+    "likes": 3,
+    "createdAt": "2026-10-18T03:33:35.487Z"
+  }
+]
